@@ -1,4 +1,4 @@
-Image To Philips Hue - Android
+Image To Philips Hue - iOS
 =======================
 
 Introduction
