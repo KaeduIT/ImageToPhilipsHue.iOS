@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+	<title>Image to Philips Hue | Hacked Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Image to Philips Hue | Hacked Project">
+    <meta name="author" content="Kaedu-IT">
+
+    <!-- Le styles -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="assets/css/docs.css" rel="stylesheet">
+    <link href="assets/js/google-code-prettify/prettify.css" rel="stylesheet">
+    <link href="style/screen.css" rel="stylesheet" type="text/css" />
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+
+</head>
+
+<body data-spy="scroll" data-target=".bs-docs-sidebar">
+
+	<!-- Subhead
+	================================================== -->
+	<header class="jumbotron subhead" id="overview">
+	  <div class="container">
+		<h1>Image To Philips Hue</h1>
+		<p class="lead">The end goal of this project is to send an image to the Philips Hue lighting system, before this can be done the lighting system must be configured.</p>
+	  </div>
+	</header>
+
+  	<div class="container">
+
+    <div class="row">
+      <div class="span3 bs-docs-sidebar">
+      	<ul class="nav nav-list bs-docs-sidenav">
+				<li><a href="#configbridge" title="Enter the bridge IP address"><i class="icon-chevron-right"></i>Configure the Bridge</a></li>
+				<li><a href="#adduser" title="Adds a user to the system"><i class="icon-chevron-right"></i>Add User</a></li>
+				<li><a href="#getconfig" title="Get the details of the existing configuration"><i class="icon-chevron-right"></i>Get Config</a></li>
+				<li><a href="#getalllights" title="Get the details of all the available lights"><i class="icon-chevron-right"></i>Get All Lights</a></li>
+				<li><a href="#changecolor" title="Send green color change to one test light"><i class="icon-chevron-right"></i>Change Color</a></li>
+				<li><a href="#changeallcolors" title="Send blue to three test lights"><i class="icon-chevron-right"></i>Change All Colors</a></li>
+				<li><a href="#go" title="Send Image"><i class="icon-chevron-right"></i>Send Image</a></li>
+				<li><a href="#weatherservice" title="Connect to local Weather Service"><i class="icon-chevron-right"></i>Weather Service Prototype</a></li>
+		</ul>
+      </div>
+
+      <div class="span9">
+
+        <!-- Bridge
+        ================================================== -->
+        <section id="configbridge">
+          <div class="page-header">
+            <h1>1. Configure the Bridge</h1>
+          </div>
+          <p class="lead">Configure the bridge before changing the lighting. The default value for the bridge IP address is <input id="bridgeIpAddress" type="text" value="192.168.1.144" class="search-query" /> change to the IP address of your bridge before moving to the next step (source <a href="http://developers.meethue.com/4_configurationapi.html">Developers MeetHue - Configuration</a>). </p>
+        </section>
+
+        <!-- addUser
+        ================================================== -->
+        <section id="adduser">
+          <div class="page-header">
+            <h1>2. Add User</h1>
+          </div>
+          <p class="lead">Configure the bridge before changing the lighting. This function adds the <input id="addusername" type="text" value="KaeduITUser" class="search-query" /> user to the bridge. Configure with a new username. (source <a href="http://developers.meethue.com/4_configurationapi.html">Developers MeetHue - Configuration</a>). <a class="btn " href="#" onclick="addUser();" title="Add a new user">Add a new user</a> <div id="adduserresp">.</div></p>
+        </section>
+
+        <!-- getConfig
+        ================================================== -->
+        <section id="getconfig">
+          <div class="page-header">
+            <h1>3. Get Config</h1>
+          </div>
+          <p class="lead">Get the configuration details for the connected bridge. (source <a href="http://developers.meethue.com/4_configurationapi.html">Developers MeetHue - Configuration</a>). <a class="btn " href="#" onclick="getConfig();" title="Get the details of the existing configuration">Get Config</a> <div id="getconfigresp">.</div> </p>
+        </section>
+
+        <!-- getAllLights
+        ================================================== -->
+        <section id="getalllights">
+          <div class="page-header">
+            <h1>4. Get All Lights</h1>
+          </div>
+          <p class="lead">Get the lighting information for this user on the connected bridge. (source <a href="http://developers.meethue.com/1_lightsapi.html">Developers MeetHue - Lights</a>). <a class="btn " href="#" onclick="getAllLights();" title="Get the details of all the available lights">Get All Lights</a> <div id="getalllightsresp">.</div> </p>
+        </section>
+
+        <!-- changeColor
+        ================================================== -->
+        <section id="changecolor">
+          <div class="page-header">
+            <h1>5. Change Color</h1>
+          </div>
+          <p class="lead">Send green color change to one test light. (source <a href="http://developers.meethue.com/1_lightsapi.html">Developers MeetHue - Lights</a>). <a class="btn " href="#" onclick="changeColor();" title="Send green color change to one test light">Change Color</a> <div id="changecolorresp">.</div></p>
+        </section>
+
+        <!-- changeAllColors
+        ================================================== -->
+        <section id="changeallcolors">
+          <div class="page-header">
+            <h1>6. Change All Colors</h1>
+          </div>
+          <p class="lead">Send blue color change to all detected lights. (source <a href="http://developers.meethue.com/1_lightsapi.html">Developers MeetHue - Lights</a>). <a class="btn " href="#" onclick="changeAllColors();" title="Send blue color change to all detected lights">Change All Colors</a> <div id="changeallcolorsresp">.</div></p>
+        </section>
+
+        <!-- go
+        ================================================== -->
+        <section id="go">
+          <div class="page-header">
+            <h1>7. Send Image</h1>
+          </div>
+          <p class="lead">Send the selected image to the bridge. (source <a href="http://developers.meethue.com/1_lightsapi.html">Developers MeetHue - Lights</a>). <a class="btn " href="#" onclick="go();" title="Send image to the available lights">Send Image</a> <div id="sendimageresp">.</div></p>
+          <div class="row offset2">
+			  <div class="span2">
+					<div class="span2 text-center"><h5 id="forecastDay">sample</h5><img class="img-rounded" id="imagetosend" src="style/images/partlycloudy.gif" title="original image" /></div>
+					<div class="row">
+						<div class="span2" style="display:none;"><canvas class="img-rounded" id="progresscopy" title="progress indicator" style="padding:0;" ></canvas></div>
+					</div>
+			  </div>
+		  </div>
+
+		  <div style="text-align:center; display:none;" class="alert alert-success fade in">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<strong>Success!</strong> Image Sent.
+		  </div>
+
+        </section>
+
+        <!-- weatherservice
+        ================================================== -->
+        <section id="weatherservice">
+          <div class="page-header">
+            <h1>8. Weather Service Prototype</h1>
+          </div>
+          <p class="lead">Subscribe to weather forecasts. Receive weather forecasts for selected postcode <input id="userpostcode" type="text" class="input-small search-query" value="B33 8TH" /> weather forecasts with weather icons; (source <a href="http://developers.meethue.com/1_lightsapi.html">Developers MeetHue - Lights</a>).
+			  <ul>
+		  			<li><a class="btn btn-primary" href="#" onclick="loadGoogleAPIs();" title="Connect to the local weather service">Start Weather Updates</a></li>
+			  		<li><a class="btn " href="#" onclick="stopAlerts();" title="Disconnect from the local weather service">Stop Weather Updates</a></li>
+			  </ul>
+         	  <div id="weatherserviceresp">.</div>
+         </p>
+		 <div style="width:100%; height:300px;" id="map-canvas"></div>
+         </section>
+      </div>
+    </div>
+
+	  <div id="resp">.</div>
+	  <input id="lightcount" type="hidden" />
+	  <div class="alert alert-error" style="display:none;">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<strong>Warning!</strong> Best check yo self, you're not looking too good.
+	  </div>
+
+  </div>
+
+
+
+ <footer class="footer"><div class="container">
+	  <p class="copyright">&copy; Copyright 2013 - <a href="/">KaeduIT</a> - All Rights Reserved </p>
+ </div></footer>
+
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+<script src="assets/js/jquery.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
+<script src="assets/js/bootstrap-transition.js"></script>
+<script src="assets/js/bootstrap-alert.js"></script>
+<script src="assets/js/bootstrap-modal.js"></script>
+<script src="assets/js/bootstrap-dropdown.js"></script>
+<script src="assets/js/bootstrap-scrollspy.js"></script>
+<script src="assets/js/bootstrap-tab.js"></script>
+<script src="assets/js/bootstrap-tooltip.js"></script>
+<script src="assets/js/bootstrap-popover.js"></script>
+<script src="assets/js/bootstrap-button.js"></script>
+<script src="assets/js/bootstrap-collapse.js"></script>
+<script src="assets/js/bootstrap-carousel.js"></script>
+<script src="assets/js/bootstrap-typeahead.js"></script>
+<script src="assets/js/bootstrap-affix.js"></script>
+
+<script src="assets/js/holder/holder.js"></script>
+<script src="assets/js/google-code-prettify/prettify.js"></script>
+
+<script src="assets/js/application.js"></script>
+
+<script src="js/adduser.js" type="text/javascript"></script>
+<script src="js/getconfig.js" type="text/javascript"></script>
+<script src="js/getalllights.js" type="text/javascript"></script>
+<script src="js/changecolour.js" type="text/javascript"></script>
+<script src="js/changeallcolours.js" type="text/javascript"></script>
+<script src="js/db.js" type="text/javascript"></script>
+<script src="js/weatherservice.js" type="text/javascript"></script>
+<script src="js/philipshue.js" type="text/javascript"></script>
+<script src="js/go.js" type="text/javascript"></script>
+
+</body>
+</html>
